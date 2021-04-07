@@ -4,6 +4,3 @@
 [submodule "CA-BH-Transaction"]
 	path = CA-BH-Transaction
 	url = https://github.com/michaelalexder/CA-BH-Transaction
-[submodule "CA-BH-Common"]
-	path = CA-BH-Common
-	url = https://github.com/michaelalexder/CA-BH-Common
