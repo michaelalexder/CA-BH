@@ -7,3 +7,6 @@
 [submodule "CA-BH-Common"]
 	path = CA-BH-Common
 	url = https://github.com/michaelalexder/CA-BH-Common.git
+[submodule "CA-BH-Customer"]
+	path = CA-BH-Customer
+	url = https://github.com/michaelalexder/CA-BH-Customer.git

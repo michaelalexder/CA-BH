@@ -3,12 +3,12 @@ services:
   accounts:
     image: ca-bh/account:latest
     ports:
-      - 8080:8080
+      - ${ACCOUNT_SERVICE_PORT}:${ACCOUNT_SERVICE_PORT}
     restart: on-failure
   transactions:
     image: ca-bh/transaction:latest
     ports:
-      - 8081:8081
+      - ${TRANSACTION_SERVICE_PORT}:${TRANSACTION_SERVICE_PORT}
     restart: on-failure
   balancer:
     image: nginx:latest
