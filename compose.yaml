@@ -1,22 +1,39 @@
 version: '3.9'
 services:
+  customers:
+    image: ca-bh/customer:latest
+    ports:
+      - ${CUSTOMER_SERVICE_PORT}:${CUSTOMER_SERVICE_PORT}
+    restart: on-failure
+    environment:
+      CUSTOMER_SERVICE_PORT: ${CUSTOMER_SERVICE_PORT}
   accounts:
     image: ca-bh/account:latest
     ports:
       - ${ACCOUNT_SERVICE_PORT}:${ACCOUNT_SERVICE_PORT}
     restart: on-failure
+    environment:
+        ACCOUNT_SERVICE_PORT: ${ACCOUNT_SERVICE_PORT}
   transactions:
     image: ca-bh/transaction:latest
     ports:
       - ${TRANSACTION_SERVICE_PORT}:${TRANSACTION_SERVICE_PORT}
     restart: on-failure
+    environment:
+      TRANSACTION_SERVICE_PORT: ${TRANSACTION_SERVICE_PORT}
   balancer:
     image: nginx:latest
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx.conf:/etc/nginx/conf.d/nginx.template
     ports:
       - 5000:5000
     depends_on:
+      - customers
       - transactions
       - accounts
     restart: on-failure
+    command: /bin/bash -c "envsubst < /etc/nginx/conf.d/nginx.template > /etc/nginx/conf.d/default.conf && exec nginx -g 'daemon off;'"
+    environment:
+      CUSTOMER_SERVICE_PORT: ${CUSTOMER_SERVICE_PORT}
+      ACCOUNT_SERVICE_PORT: ${ACCOUNT_SERVICE_PORT}
+      TRANSACTION_SERVICE_PORT: ${TRANSACTION_SERVICE_PORT}

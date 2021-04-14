@@ -11,6 +11,7 @@
 	</properties>
 	<modules>
 		<module>CA-BH-Common</module>
+		<module>CA-BH-Customer</module>
 		<module>CA-BH-Account</module>
 		<module>CA-BH-Transaction</module>
 	</modules>
