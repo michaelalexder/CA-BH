@@ -7,6 +7,7 @@ services:
     restart: on-failure
     environment:
       CUSTOMER_SERVICE_PORT: ${CUSTOMER_SERVICE_PORT}
+      ACCOUNT_SERVICE_HOST: "http://accounts:${ACCOUNT_SERVICE_PORT}"
   accounts:
     image: ca-bh/account:latest
     ports:
@@ -14,6 +15,7 @@ services:
     restart: on-failure
     environment:
         ACCOUNT_SERVICE_PORT: ${ACCOUNT_SERVICE_PORT}
+        TRANSACTION_SERVICE_HOST: "http://transactions:${TRANSACTION_SERVICE_PORT}"
   transactions:
     image: ca-bh/transaction:latest
     ports:
